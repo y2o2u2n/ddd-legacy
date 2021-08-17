@@ -31,11 +31,11 @@ public class ProductService {
     public Product create(final Product request) {
         final BigDecimal price = request.getPrice();
         if (Objects.isNull(price) || price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("상품의 가격은 0보다 작을 수 없습니다.");
         }
         final String name = request.getName();
         if (Objects.isNull(name) || purgomalumClient.containsProfanity(name)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("상품의 이름에는 욕설이 포함될 수 없습니다.");
         }
         final Product product = new Product();
         product.setId(UUID.randomUUID());
